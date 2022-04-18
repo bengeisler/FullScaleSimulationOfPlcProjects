@@ -20,12 +20,28 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[ActorHomePos := Enable AND NOT LockHomePos AND ToHome AND NOT ActorWorkPos AND (NOT SensorHomePos OR HoldPosition);
-ActorWorkPos := Enable AND NOT LockWorkPos AND ToWork AND NOT ActorHomePos AND (NOT SensorWorkPos OR HoldPosition);]]></ST>
+      <ST><![CDATA[ActorHomePos := SetOutput(ToHome, SensorHomePos, LockHomePos, ActorWorkPos);
+ActorWorkPos := SetOutput(ToWork, SensorWorkPos, LockWorkPos, ActorHomePos);]]></ST>
     </Implementation>
+    <Method Name="SetOutput" Id="{2b2cbc49-cd42-42ab-8144-70652882f6fc}">
+      <Declaration><![CDATA[METHOD PRIVATE SetOutput : BOOL
+VAR_INPUT
+	MoveToPos : BOOL;
+	PosReached: BOOL;
+	DirectionLocked: BOOL;
+	OutputInterlock: BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SetOutput := MoveToPos AND Enable AND NOT DirectionLocked AND NOT OutputInterlock AND (NOT PosReached OR HoldPosition);]]></ST>
+      </Implementation>
+    </Method>
     <LineIds Name="FB_SimpleLinearTwoWayDrive">
       <LineId Id="9" Count="0" />
       <LineId Id="17" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_SimpleLinearTwoWayDrive.SetOutput">
+      <LineId Id="5" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>
