@@ -12,7 +12,8 @@ END_VAR
     <Implementation>
       <ST><![CDATA[No_Movement_When_Locked();
 Movement_stops_when_position_is_reached();
-Movement_executes_when_triggered();]]></ST>
+Movement_executes_when_triggered();
+Output_is_still_active_when_position_has_been_reached_but_holdPos_has_been_set();]]></ST>
     </Implementation>
     <Method Name="Movement_executes_when_triggered" Id="{665bda91-0ea2-4739-b488-2974f55cf3db}">
       <Declaration><![CDATA[METHOD Movement_executes_when_triggered : BOOL
@@ -78,14 +79,38 @@ sut(
 	ToHome := FALSE,
 	ToWork := TRUE);
 	
-AssertEquals(result, sut.ActorWorkPos, 'Movement even if not enabled');
+AssertEquals(result, sut.ActorWorkPos, 'Position not hold.');
+
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Output_is_still_active_when_position_has_been_reached_but_holdPos_has_been_set" Id="{8b1a8142-d64c-4aa8-b645-31f96c78c98e}">
+      <Declaration><![CDATA[METHOD Output_is_still_active_when_position_has_been_reached_but_holdPos_has_been_set : BOOL
+VAR_INPUT
+END_VAR
+VAR
+	sut: FB_SimpleLinearTwoWayDrive;
+	result : BOOL := TRUE;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('Output remains set when position has been reached when setting hold pos is true');
+
+sut(
+	SensorHomePos := FALSE,
+	SensorWorkPos := TRUE,
+	HoldPosition := TRUE,
+	Enable := TRUE,
+	ToHome := FALSE,
+	ToWork := TRUE);
+	
+AssertEquals(result, sut.ActorWorkPos, '');
 
 TEST_FINISHED();]]></ST>
       </Implementation>
     </Method>
     <LineIds Name="FB_SimpleLinearTwoWayDrive_Test">
       <LineId Id="9" Count="0" />
-      <LineId Id="17" Count="1" />
+      <LineId Id="17" Count="2" />
     </LineIds>
     <LineIds Name="FB_SimpleLinearTwoWayDrive_Test.Movement_executes_when_triggered">
       <LineId Id="9" Count="10" />
@@ -99,9 +124,17 @@ TEST_FINISHED();]]></ST>
       <LineId Id="5" Count="0" />
       <LineId Id="11" Count="0" />
       <LineId Id="10" Count="0" />
-      <LineId Id="12" Count="6" />
+      <LineId Id="12" Count="1" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="15" Count="3" />
       <LineId Id="7" Count="0" />
       <LineId Id="6" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_SimpleLinearTwoWayDrive_Test.Output_is_still_active_when_position_has_been_reached_but_holdPos_has_been_set">
+      <LineId Id="9" Count="4" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="14" Count="5" />
+      <LineId Id="5" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

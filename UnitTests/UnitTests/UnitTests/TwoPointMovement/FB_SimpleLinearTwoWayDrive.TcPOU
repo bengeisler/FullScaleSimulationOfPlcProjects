@@ -6,10 +6,11 @@ VAR_INPUT
 	SensorHomePos: BOOL;
 	SensorWorkPos: BOOL;
 	Enable: BOOL;
+	HoldPosition: BOOL;	// TRUE: Hold output to true even if position has been reached
 	ToHome: BOOL;
 	ToWork: BOOL;
 END_VAR
-VAR_OUTPUT
+VAR_OUTPUT	
 	ActorHomePos: BOOL;
 	ActorWorkPos: BOOL;
 END_VAR
@@ -17,8 +18,8 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[ActorHomePos := Enable AND ToHome AND NOT ActorWorkPos AND NOT SensorHomePos;
-ActorWorkPos := Enable AND ToWork AND NOT ActorHomePos AND NOT SensorWorkPos;]]></ST>
+      <ST><![CDATA[ActorHomePos := Enable AND ToHome AND NOT ActorWorkPos AND (NOT SensorHomePos OR HoldPosition);
+ActorWorkPos := Enable AND ToWork AND NOT ActorHomePos AND (NOT SensorWorkPos OR HoldPosition);]]></ST>
     </Implementation>
     <LineIds Name="FB_SimpleLinearTwoWayDrive">
       <LineId Id="9" Count="0" />
