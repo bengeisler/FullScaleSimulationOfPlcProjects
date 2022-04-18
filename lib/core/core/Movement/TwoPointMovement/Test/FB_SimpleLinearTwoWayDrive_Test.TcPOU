@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="FB_SimpleLinearTwoWayDrive_Test" Id="{d9e1087f-58a6-4e65-903c-24417411064b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SimpleLinearTwoWayDrive_Test EXTENDS FB_TestSuite
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="No_Movement_When_Locked" Id="{74abaccd-090b-4cac-b60e-cf51473bfb80}">
+      <Declaration><![CDATA[METHOD No_Movement_When_Locked : BOOL
+VAR_INPUT
+END_VAR
+VAR
+	sut: FB_SimpleLinearTwoWayDrive;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('No movement should be possible when locked');
+
+sut(
+	SensorHomePos := TRUE,
+	SensorWorkPos := FALSE,
+	Enable := FALSE,
+	ToHome := FALSE,
+	ToWork := FALSE);
+	
+AssertEquals(FALSE, sut.ActorWorkPos, 'Movement even if not enabled');
+
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_SimpleLinearTwoWayDrive_Test">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_SimpleLinearTwoWayDrive_Test.No_Movement_When_Locked">
+      <LineId Id="5" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="12" Count="6" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="6" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

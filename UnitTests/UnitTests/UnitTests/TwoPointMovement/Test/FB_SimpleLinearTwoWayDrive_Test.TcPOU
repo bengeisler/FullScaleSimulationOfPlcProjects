@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="FB_SimpleLinearTwoWayDrive_Test" Id="{d9e1087f-58a6-4e65-903c-24417411064b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SimpleLinearTwoWayDrive_Test EXTENDS FB_TestSuite
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[No_Movement_When_Locked();
+Movement_stops_when_position_is_reached();
+Movement_executes_when_triggered();]]></ST>
+    </Implementation>
+    <Method Name="Movement_executes_when_triggered" Id="{665bda91-0ea2-4739-b488-2974f55cf3db}">
+      <Declaration><![CDATA[METHOD Movement_executes_when_triggered : BOOL
+VAR_INPUT
+END_VAR
+VAR
+	sut: FB_SimpleLinearTwoWayDrive;
+	result : BOOL := TRUE;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('Movement executes when triggered');
+
+sut(
+	SensorHomePos := TRUE,
+	SensorWorkPos := FALSE,
+	Enable := TRUE,
+	ToHome := FALSE,
+	ToWork := TRUE);
+	
+AssertEquals(result, sut.ActorWorkPos, 'Movement does not start');
+
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Movement_stops_when_position_is_reached" Id="{c6fe306a-d96b-44dd-8f7e-92ce75c0cfb9}">
+      <Declaration><![CDATA[METHOD Movement_stops_when_position_is_reached : BOOL
+VAR_INPUT
+END_VAR
+VAR_INST
+	sut: FB_SimpleLinearTwoWayDrive;
+	result : BOOL := FALSE;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('Movement stops when position is reached');
+
+sut(
+	SensorHomePos := TRUE,
+	SensorWorkPos := FALSE,
+	Enable := TRUE,
+	ToHome := TRUE,
+	ToWork := FALSE);
+	
+AssertEquals(result, sut.ActorWorkPos, 'Movement even if not enabled');
+
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="No_Movement_When_Locked" Id="{74abaccd-090b-4cac-b60e-cf51473bfb80}">
+      <Declaration><![CDATA[METHOD No_Movement_When_Locked : BOOL
+VAR_INPUT
+END_VAR
+VAR
+	sut: FB_SimpleLinearTwoWayDrive;
+	result : BOOL := FALSE;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('No movement should be possible when locked');
+
+sut(
+	SensorHomePos := TRUE,
+	SensorWorkPos := FALSE,
+	Enable := FALSE,
+	ToHome := FALSE,
+	ToWork := TRUE);
+	
+AssertEquals(result, sut.ActorWorkPos, 'Movement even if not enabled');
+
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_SimpleLinearTwoWayDrive_Test">
+      <LineId Id="9" Count="0" />
+      <LineId Id="17" Count="1" />
+    </LineIds>
+    <LineIds Name="FB_SimpleLinearTwoWayDrive_Test.Movement_executes_when_triggered">
+      <LineId Id="9" Count="10" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_SimpleLinearTwoWayDrive_Test.Movement_stops_when_position_is_reached">
+      <LineId Id="10" Count="10" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_SimpleLinearTwoWayDrive_Test.No_Movement_When_Locked">
+      <LineId Id="5" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="12" Count="6" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="6" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

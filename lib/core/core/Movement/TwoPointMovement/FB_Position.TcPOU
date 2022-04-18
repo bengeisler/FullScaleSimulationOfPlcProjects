@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="FB_Position" Id="{8542c028-d930-47c9-a51d-a0824c396aea}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Position IMPLEMENTS IPosition
+VAR_INPUT
+	Sensor: BOOL;
+END_VAR
+VAR_OUTPUT
+	Actor: BOOL;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Release Signal
+Locked := FALSE;]]></ST>
+    </Implementation>
+    <Method Name="Lock" Id="{fd575375-4470-454a-bff5-6842db67970d}">
+      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
+METHOD Lock : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Locked := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Locked" Id="{a407b0b7-e753-4ac5-8d7a-ded34fa01ef7}">
+      <Declaration><![CDATA[PROPERTY Locked : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{2a9c4fa8-787e-424b-a196-a514d3077775}">
+        <Declaration><![CDATA[VAR_INST
+	_locked: BOOL;
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="MoveTo" Id="{5fd46933-d567-466c-aaca-90b6bfa22e96}">
+      <Declaration><![CDATA[METHOD MoveTo : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Actor := NOT Reached AND NOT Locked;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Moving" Id="{31d22de0-bded-42c8-a401-0a383ec84842}">
+      <Declaration><![CDATA[PROPERTY Moving : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{1da6f644-cfff-41e5-b3a2-03ed63d93a37}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Moving := Actor;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Reached" Id="{fb261eb4-b23e-4b37-aacf-36fbb85ee092}">
+      <Declaration><![CDATA[PROPERTY Reached : BOOL]]></Declaration>
+      <Get Name="Get" Id="{d79ba9f9-0e8b-446d-b9d7-93deec4f9ff9}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Reached := Sensor;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <LineIds Name="FB_Position">
+      <LineId Id="9" Count="1" />
+    </LineIds>
+    <LineIds Name="FB_Position.Lock">
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Position.Locked.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Position.MoveTo">
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Position.Moving.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Position.Reached.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <Itf Name="IPosition" Id="{c3acbbac-23c5-4d3c-bf08-59f54f93dfb1}">
+    <Declaration><![CDATA[INTERFACE IPosition
+]]></Declaration>
+    <Method Name="Lock" Id="{f431f11f-e5d4-458e-9bba-4988bd993446}">
+      <Declaration><![CDATA[METHOD Lock : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Property Name="Locked" Id="{70868ab8-bf79-40ee-9e9a-12be4a9e12ef}">
+      <Declaration><![CDATA[PROPERTY Locked : BOOL]]></Declaration>
+      <Get Name="Get" Id="{cf4fa9b5-a031-43cf-a3ab-dfb845c7ba32}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="MoveTo" Id="{7ac8b1d2-f3a4-45dc-8654-8fbf7bd1ba0e}">
+      <Declaration><![CDATA[METHOD MoveTo : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Property Name="Moving" Id="{8a36d9aa-0e46-4322-bd16-4048a6c4dff3}">
+      <Declaration><![CDATA[PROPERTY Moving : BOOL]]></Declaration>
+      <Get Name="Get" Id="{966b92e9-96c2-4aa8-8b74-b0892a53c06e}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="Reached" Id="{bb5156d0-b4de-4387-8213-7a8fc3a76766}">
+      <Declaration><![CDATA[PROPERTY Reached : BOOL]]></Declaration>
+      <Get Name="Get" Id="{7cce7d2e-7c03-4755-b349-be1f83b37504}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

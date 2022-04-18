@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.29">
+	<Project ProjectGUID="{1FE1246A-A0C4-46A3-9786-82C9670567EE}" Target64Bit="true" ShowHideConfigurations="#x106">
+		<System>
+			<Settings MaxCpus="8" NonWinCpus="1" Packages="4">
+				<Cpu CpuId="7"/>
+			</Settings>
+		</System>
+		<Plc>
+			<Project Name="Movement" AmsPort="851" TargetArchiveSettings="#x0001" FileArchiveSettings="#x0000" SymbolicMapping="true">
+				<Instance Id="#x08502000" KeepUnrestoredLinks="2" TmcPath="..\core\Movement\Movement.tmc">
+					<Name>Movement Instance</Name>
+					<TmcDesc GUID="{E77B88B8-4385-402F-8A1B-A2F69B7840B6}" TcSmClass="TComPlcObjDef">
+						<Name>Movement</Name>
+						<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+						<InitSequence>P</InitSequence>
+						<Contexts>
+							<Context>
+								<Id>1</Id>
+								<Name>Default</Name>
+							</Context>
+						</Contexts>
+						<Parameters>
+							<Parameter ReadOnly="true">
+								<Name>Application Name</Name>
+								<BitSize>72</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000100000008}">STRING(8)</BaseType>
+								<PTCID>#x08500003</PTCID>
+							</Parameter>
+							<Parameter ReadOnly="true">
+								<Name>Project Name</Name>
+								<BitSize>72</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000100000008}">STRING(8)</BaseType>
+								<PTCID>#x0850000c</PTCID>
+							</Parameter>
+							<Parameter ReadOnly="true">
+								<Name>Application Port</Name>
+								<BitSize>16</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000005}">UINT</BaseType>
+								<PTCID>#x08500004</PTCID>
+							</Parameter>
+							<Parameter ReadOnly="true">
+								<Name>Auxtask Object Id</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-00000000000F}">OTCID</BaseType>
+								<PTCID>#x0850000b</PTCID>
+							</Parameter>
+							<Parameter ReadOnly="true">
+								<Name>Application Timestamp</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-00000000004C}">DT</BaseType>
+								<PTCID>#x0850000d</PTCID>
+							</Parameter>
+							<Parameter ReadOnly="true">
+								<Name>Symbolic Mapping</Name>
+								<BitSize>8</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+								<PTCID>#x0850801b</PTCID>
+							</Parameter>
+						</Parameters>
+						<Properties>
+							<Property>
+								<Name>ApplicationName</Name>
+								<Value>Port_851</Value>
+							</Property>
+							<Property>
+								<Name>ChangeDate</Name>
+								<Value>2022-04-18T19:30:27</Value>
+							</Property>
+							<Property>
+								<Name>GeneratedCodeSize</Name>
+								<Value>290816</Value>
+							</Property>
+							<Property>
+								<Name>GlobalDataSize</Name>
+								<Value>78827520</Value>
+							</Property>
+						</Properties>
+						<ParentOTCID>#x08500000</ParentOTCID>
+						<ParameterValues>
+							<Value>
+								<Name>Application Name</Name>
+								<String>Port_851</String>
+							</Value>
+							<Value>
+								<Name>Project Name</Name>
+								<String>Movement</String>
+							</Value>
+							<Value>
+								<Name>Application Port</Name>
+								<Value>851</Value>
+							</Value>
+							<Value>
+								<Name>Auxtask Object Id</Name>
+								<Value>139460624</Value>
+							</Value>
+							<Value>
+								<Name>Application Timestamp</Name>
+								<Value>1650310227</Value>
+							</Value>
+							<Value>
+								<Name>Symbolic Mapping</Name>
+								<EnumText>TRUE</EnumText>
+							</Value>
+						</ParameterValues>
+					</TmcDesc>
+					<Contexts>
+						<Context>
+							<Id>1</Id>
+							<Name>Default</Name>
+						</Context>
+					</Contexts>
+				</Instance>
+			</Project>
+		</Plc>
+	</Project>
+</TcSmProject>

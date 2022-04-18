@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="FB_TwoWayPneumaticDrive" Id="{562480a2-ed3c-4fec-9181-18f328b0d4f3}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_TwoWayPneumaticDrive IMPLEMENTS ITwoPointMovement
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="InHomePos" Id="{482e9a7e-cb1b-44e4-a114-a8f7718bcddd}">
+      <Declaration><![CDATA[{warning 'Eigenschaftenimplementierung hinzufügen'}
+PROPERTY InHomePos : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{888bc154-b487-4f7a-b3cd-ec4b7b1a69a4}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="InWorkPos" Id="{988e3956-3fa1-4176-a942-3692063c2677}">
+      <Declaration><![CDATA[{warning 'Eigenschaftenimplementierung hinzufügen'}
+PROPERTY InWorkPos : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{2ae0acd4-d6f6-4e40-a652-b417d095b424}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="ToHomePos" Id="{06e7a8df-40bc-47df-9d32-40d79090baac}">
+      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
+METHOD ToHomePos : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ToWorkPos" Id="{1917dd37-a1b4-4775-8b5b-7503cb460da5}">
+      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
+METHOD ToWorkPos : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_TwoWayPneumaticDrive">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TwoWayPneumaticDrive.InHomePos.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TwoWayPneumaticDrive.InWorkPos.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TwoWayPneumaticDrive.ToHomePos">
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TwoWayPneumaticDrive.ToWorkPos">
+      <LineId Id="4" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

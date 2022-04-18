@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="FB_SimpleLinearTwoWayDrive" Id="{d5079cf3-2029-4674-b5d0-714b53c5075a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SimpleLinearTwoWayDrive
+VAR_INPUT
+	SensorHomePos: BOOL;
+	SensorWorkPos: BOOL;
+	Enable: BOOL;
+	ToHome: BOOL;
+	ToWork: BOOL;
+END_VAR
+VAR_OUTPUT
+	ActorHomePos: BOOL;
+	ActorWorkPos: BOOL;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[ActorHomePos := Enable AND ToHome AND NOT ActorWorkPos AND NOT SensorHomePos;
+ActorWorkPos := Enable AND ToWork AND NOT ActorHomePos AND NOT SensorWorkPos;]]></ST>
+    </Implementation>
+    <LineIds Name="FB_SimpleLinearTwoWayDrive">
+      <LineId Id="9" Count="0" />
+      <LineId Id="17" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

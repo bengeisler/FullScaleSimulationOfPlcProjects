@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <Itf Name="ITwoPointMovement" Id="{394d3116-9955-4ae0-a2f6-ebc87ee1b0c5}">
+    <Declaration><![CDATA[INTERFACE ITwoPointMovement
+]]></Declaration>
+    <Property Name="InHomePos" Id="{b024296b-3083-44b9-af98-8d049e4d34ce}">
+      <Declaration><![CDATA[PROPERTY InHomePos : BOOL]]></Declaration>
+      <Get Name="Get" Id="{8c62b914-370b-435a-9a73-e3d4191f4dac}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="InWorkPos" Id="{efd760dc-ecda-4694-b4e3-511f93d9e477}">
+      <Declaration><![CDATA[PROPERTY InWorkPos : BOOL]]></Declaration>
+      <Get Name="Get" Id="{0d80be22-29fd-446d-86e5-298a039b24a1}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="ToHomePos" Id="{44928774-89d8-46ee-92f2-8cee959caa80}">
+      <Declaration><![CDATA[METHOD ToHomePos : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="ToWorkPos" Id="{6ae4c225-7cf1-497c-b851-8282c53f8fa0}">
+      <Declaration><![CDATA[METHOD ToWorkPos : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>
