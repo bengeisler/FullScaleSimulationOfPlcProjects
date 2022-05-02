@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <DUT Name="ST_BoolHmi" Id="{532a3cf3-4e50-47bd-8a52-1905ab6cc62f}">
+    <Declaration><![CDATA[TYPE ST_BoolHmi :
+STRUCT
+	Enabled: BOOL;
+	PlcToHmi: BOOL;
+	HmiToPlc: BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

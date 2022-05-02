@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="FB_Unit" Id="{ab8dbb11-5f04-4f82-9f6d-1cfe55ae9701}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Unit
+VAR_INPUT
+	OpMode: E_OpMode;
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <LineIds Name="FB_Unit">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
