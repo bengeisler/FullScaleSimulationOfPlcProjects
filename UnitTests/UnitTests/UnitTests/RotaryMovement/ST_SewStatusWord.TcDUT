@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <DUT Name="ST_SewStatusWord" Id="{5ad4b75c-2353-4b5e-82a3-d005ea2b21a7}">
+    <Declaration><![CDATA[TYPE ST_SewStatusWord :
+STRUCT
+	OutputStageEnabled: 		BIT;	// enabled="1", inhibited="0"
+	InverterReady: 				BIT;	// ready="1", not ready="0"
+	PODataEnabled: 				BIT;	// enabled="1", disabled="0"
+	CurrentRampGEneratorSet: 	BIT;	// Integrator 2="1", Integrator 1="0"
+	CurrentParameterSet: 		BIT;	// Parameter set 2="1", Parameter set 1="0"
+	FaultOrWarning:				BIT;	// pending="1", no fault="0"
+	CWLimitSwitchActive:		BIT;	// active="1", inactive="0"
+	CCWLimitSwitchACtive:		BIT;	// active="1", inactive="0"
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <DUT Name="U_SewControlWord1" Id="{fc9d2e65-6ab7-4104-b77a-8bd741d32d15}">
+    <Declaration><![CDATA[TYPE U_SewControlWord1 :
+UNION
+	nUINT:	UINT;
+	aBits:	ST_SewControlWord;
+END_UNION
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

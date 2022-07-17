@@ -3,7 +3,9 @@
   <POU Name="POU_Test" Id="{196e0b9a-9deb-4dd0-a48f-8902bcc60beb}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM POU_Test
 VAR
-	fbSimpleLinearTwoWayDriveTest: FB_SimpleLinearTwoWayDrive_Test;
+	fbSimpleLinearTwoWayDriveTest: FB_SimpleLinearTwoWayDrive_Test; 
+	fbLinearMovementWithFeedbackTest: FB_LinearMovementWithFeedbackTest;
+	fbSewMovitracBFieldbusTest: FB_SewMovitracBFieldbusTest;
 END_VAR
 ]]></Declaration>
     <Implementation>

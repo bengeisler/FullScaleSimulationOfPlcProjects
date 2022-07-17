@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <DUT Name="ST_SimpleRotaryTwoWayDriveStatus" Id="{736fe510-7568-401d-b566-e54adc5d668f}">
+    <Declaration><![CDATA[TYPE ST_SimpleRotaryTwoWayDriveStatus :
+STRUCT
+	Ready: 	BOOL; 			(* Inverter is ready for operation *)
+	Warning: BOOL; 			(* Inverter is in warning state *)
+	Malfunction: BOOL; 		(* Inverter malfunctions *)
+	Speed: REAL; 			(* Speed 0-100% *)
+	OutputCurrent: REAL; 	(* output current in [A] *)
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

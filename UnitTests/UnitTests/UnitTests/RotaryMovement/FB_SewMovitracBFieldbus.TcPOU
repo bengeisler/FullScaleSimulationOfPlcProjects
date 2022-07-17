@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="FB_SewMovitracBFieldbus" Id="{47f5a708-b43d-40ec-a55a-fa53341f1706}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SewMovitracBFieldbus
+VAR_INPUT
+	PI1: UINT;	(* Process input data 1: status word *)
+	PI2: UINT;	(* Process input data 2: speed *)
+	PI3: UINT;	(* Process input data 3: output current *)
+	Control: ST_SimpleRotaryTwoWayDriveControl;
+END_VAR
+VAR_OUTPUT
+	PO1: U_SewControlWord1;	(* Process output data 1: control word *)
+	PO2: UINT;	(* Process output data 2: speed *)
+	PO3: UINT;	(* Process output data 3: not used *)
+	Status: ST_SimpleRotaryTwoWayDriveStatus; 
+END_VAR
+VAR
+	StatusWord1: U_SewStatusWord1;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Set outputs
+PO1 := SetPO1();
+PO2 := HOST_TO_BE16(LIMIT(0, Control.Speed, 100));
+PO3 := 0;
+
+// Process inputs
+StatusWord1.nUint := BE16_TO_HOST(in:=PI1);
+
+Status.Warning := StatusWord1.aBits.InverterReady AND StatusWord1.aBits.FaultOrWarning;
+Status.Ready := StatusWord1.aBits.InverterReady AND NOT StatusWord1.aBits.FaultOrWarning;
+Status.Malfunction := NOT StatusWord1.aBits.InverterReady AND StatusWord1.aBits.FaultOrWarning;
+Status.Speed := BE16_TO_HOST(in:=PI2);
+Status.OutputCurrent := BE16_TO_HOST(in:=PI3);]]></ST>
+    </Implementation>
+    <Method Name="SetPO1" Id="{13c73604-b403-4adc-b92e-514c9d58987e}">
+      <Declaration><![CDATA[METHOD PRIVATE SetPO1 : U_SewControlWord1
+VAR_INPUT
+END_VAR
+VAR
+	PO1_LittleEndian: U_SewControlWord1;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Bit 0: Controller inhibit
+PO1_LittleEndian.aBits.ControllerInhibit := Control.Lock;
+// Bit 1 & 2: Enable
+PO1_LittleEndian.aBits.EnableElseRapidStop := Control.Enable;
+PO1_LittleEndian.aBits.EnableElseStop := Control.Enable;
+// Bit 3: Hold Control
+PO1_LittleEndian.aBits.HoldControl := NOT Control.Run;
+// Bit 4 & 5: not used
+PO1_LittleEndian.aBits.IntegratorSwitchover := FALSE;
+PO1_LittleEndian.aBits.ParameterSetSwitchOver := FALSE;
+// Bit 6: Reset
+PO1_LittleEndian.aBits.Reset := Control.Reset;
+// Bit 7: Reserved
+PO1_LittleEndian.aBits.Reserved1 := FALSE;
+// Bit 8: Direction of rotation
+IF Control.Direction = E_Direction.Right_Forward_Up THEN
+	PO1_LittleEndian.aBits.DirectionOfRotation := FALSE;
+ELSE
+	PO1_LittleEndian.aBits.DirectionOfRotation := TRUE;
+END_IF
+// Bit 9 & 10: Acc / Decc => not used
+PO1_LittleEndian.aBits.AccelerationDecceleration1 := FALSE;
+PO1_LittleEndian.aBits.AccelerationDecceleration2 := FALSE;
+// Bit 11 & 12: Selection of internal fixed setpoint => set to use setpoint via PO2
+PO1_LittleEndian.aBits.FixedSetpoints1 := FALSE;
+PO1_LittleEndian.aBits.FixedSetpoints2 := FALSE;
+// Bit 13: Fixed setpoint switch over => not used
+PO1_LittleEndian.aBits.FixedSetpointSwitchover := FALSE;
+// Bit 14 & 15: reserved
+PO1_LittleEndian.aBits.Reserved2 := FALSE;
+PO1_LittleEndian.aBits.Reserved3 := FALSE;
+
+// Convert to Big Endian
+SetPO1.nUINT := HOST_TO_BE16(in := PO1_LittleEndian.nUINT);]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_SewMovitracBFieldbus">
+      <LineId Id="59" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="60" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="76" Count="1" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="51" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_SewMovitracBFieldbus.SetPO1">
+      <LineId Id="5" Count="14" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="22" Count="13" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="41" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

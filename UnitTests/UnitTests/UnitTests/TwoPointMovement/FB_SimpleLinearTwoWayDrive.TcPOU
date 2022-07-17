@@ -17,9 +17,13 @@ VAR_OUTPUT
 	ActorWorkPos: BOOL;
 END_VAR
 VAR
+	toHomePos: BOOL;
+	toWorkPos: BOOL;
+	HomePos: FB_LinearMovementWithFeedback;
+	WorkPos: FB_LinearMovementWithFeedback;
 END_VAR
-VAR PERSISTENT
-	stHMI: ST_SimpleLinearTwoWayDriveHmi;
+VAR_IN_OUT
+	Hmi: ST_SimpleLinearTwoWayDriveHmi;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -30,46 +34,45 @@ END_VAR
 // disadvantages:
 // - adds another layer of indirection, e.g. for cross-reference search
 
-CASE SUPER^.OpMode OF
-	E_OpMode.Manual, E_OpMode.Jog:
-		ActorHomePos := SetOutput(stHmi.ToHomePos.HmiToPlc, SensorHomePos, LockHomePos, ActorWorkPos);
-		ActorWorkPos := SetOutput(stHmi.ToWorkPos.HmiToPlc, SensorWorkPos, LockWorkPos, ActorHomePos);	
-	E_OpMode.AutomaticRunning:
-		ActorHomePos := SetOutput(ToHome, SensorHomePos, LockHomePos, ActorWorkPos);
-		ActorWorkPos := SetOutput(ToWork, SensorWorkPos, LockWorkPos, ActorHomePos);	
-	ELSE
-		ActorHomePos := ActorWorkPos := FALSE; 
-END_CASE 
-]]></ST>
+toHomePos :=
+	(SUPER^.OpMode = E_OpMode.Manual AND Hmi.ToHomePos.HmiToPlc)
+	OR
+	(SUPER^.OpMode = E_OpMode.Automatic AND ToHome);
+	
+toWorkPos :=
+	(SUPER^.OpMode = E_OpMode.Manual AND Hmi.ToWorkPos.HmiToPlc)
+	OR
+	(SUPER^.OpMode = E_OpMode.Automatic AND ToHome);
+
+HomePos(
+	ToPosition := toHomePos,
+	Feedback := SensorHomePos,
+	Lock := NOT Enable OR LockHomePos OR toWorkPos,
+	HoldOutput := HoldPosition,
+	Actor => ActorHomePos);
+	
+WorkPos(
+	ToPosition := toWorkPos,
+	Feedback := SensorWorkPos,
+	Lock := NOT Enable OR LockWorkPos OR toHomePos,
+	HoldOutput := HoldPosition,
+	Actor => ActorWorkPos);]]></ST>
     </Implementation>
-    <Method Name="SetOutput" Id="{2b2cbc49-cd42-42ab-8144-70652882f6fc}">
-      <Declaration><![CDATA[METHOD PRIVATE SetOutput : BOOL
-VAR_INPUT
-	MoveToPos : BOOL;
-	PosReached: BOOL;
-	DirectionLocked: BOOL;
-	OutputInterlock: BOOL;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[SetOutput := MoveToPos AND Enable AND NOT DirectionLocked AND NOT OutputInterlock AND (NOT PosReached OR HoldPosition);]]></ST>
-      </Implementation>
-    </Method>
     <LineIds Name="FB_SimpleLinearTwoWayDrive">
-      <LineId Id="36" Count="5" />
-      <LineId Id="69" Count="0" />
-      <LineId Id="68" Count="0" />
-      <LineId Id="70" Count="0" />
-      <LineId Id="79" Count="1" />
-      <LineId Id="72" Count="0" />
-      <LineId Id="77" Count="1" />
-      <LineId Id="74" Count="0" />
-      <LineId Id="76" Count="0" />
-      <LineId Id="67" Count="0" />
-      <LineId Id="63" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_SimpleLinearTwoWayDrive.SetOutput">
-      <LineId Id="5" Count="0" />
+      <LineId Id="101" Count="5" />
+      <LineId Id="157" Count="0" />
+      <LineId Id="156" Count="0" />
+      <LineId Id="159" Count="3" />
+      <LineId Id="164" Count="2" />
+      <LineId Id="163" Count="0" />
+      <LineId Id="141" Count="0" />
+      <LineId Id="140" Count="0" />
+      <LineId Id="142" Count="3" />
+      <LineId Id="167" Count="0" />
+      <LineId Id="149" Count="0" />
+      <LineId Id="151" Count="3" />
+      <LineId Id="150" Count="0" />
+      <LineId Id="168" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

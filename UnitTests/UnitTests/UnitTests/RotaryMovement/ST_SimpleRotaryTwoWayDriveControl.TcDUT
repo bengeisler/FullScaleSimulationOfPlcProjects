@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <DUT Name="ST_SimpleRotaryTwoWayDriveControl" Id="{38b74bb1-5d56-4a33-b9f4-3e216c9fcf54}">
+    <Declaration><![CDATA[TYPE ST_SimpleRotaryTwoWayDriveControl :
+STRUCT
+	Enable: 	BOOL;
+	Lock:		BOOL;
+	Run: 		BOOL;
+	Reset:		BOOL;
+	Speed:		UINT; 
+	Direction: 	E_Direction;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

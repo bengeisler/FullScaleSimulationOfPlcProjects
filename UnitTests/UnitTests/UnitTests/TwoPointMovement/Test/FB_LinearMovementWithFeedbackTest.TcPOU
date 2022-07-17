@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="FB_LinearMovementWithFeedbackTest" Id="{a4f63ed1-56b1-4e6a-95e3-66dd048248da}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_LinearMovementWithFeedbackTest EXTENDS FB_TestSuite
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[Movement_stops_when_position_is_reached();
+Movement_executes_when_triggered();
+Output_is_still_active_when_position_has_been_reached_but_holdPos_has_been_set();
+No_Movement_When_Direction_Is_Locked();]]></ST>
+    </Implementation>
+    <Method Name="Movement_executes_when_triggered" Id="{665bda91-0ea2-4739-b488-2974f55cf3db}">
+      <Declaration><![CDATA[METHOD Movement_executes_when_triggered : BOOL
+VAR_INPUT
+END_VAR
+VAR
+	sut: FB_LinearMovementWithFeedback;
+	result : BOOL := TRUE;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('Movement executes when triggered');
+
+sut(
+	ToPosition:= TRUE,
+	Feedback:= FALSE,
+	Lock:= FALSE,
+	HoldOutput:= FALSE);
+	
+AssertEquals(result, sut.Actor, 'Movement does not start');
+
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Movement_stops_when_position_is_reached" Id="{c6fe306a-d96b-44dd-8f7e-92ce75c0cfb9}">
+      <Declaration><![CDATA[METHOD Movement_stops_when_position_is_reached : BOOL
+VAR_INPUT
+END_VAR
+VAR_INST
+	sut: FB_LinearMovementWithFeedback;
+	result : BOOL := FALSE;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('Movement stops when position is reached');
+
+sut(
+	ToPosition:= TRUE,
+	Feedback:= True,
+	Lock:= FALSE,
+	HoldOutput:= FALSE);
+	
+AssertEquals(result, sut.Actor, 'Movement even if not enabled');
+
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="No_Movement_When_Direction_Is_Locked" Id="{c91f3a13-b3c7-4c01-8905-9da15cf0d01c}">
+      <Declaration><![CDATA[METHOD No_Movement_When_Direction_Is_Locked : BOOL
+VAR_INPUT
+END_VAR
+VAR
+	sut: FB_LinearMovementWithFeedback;
+	result : BOOL := FALSE;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('Output should remain set when position is reached but Hold is set');
+
+sut(
+	ToPosition:= TRUE,
+	Feedback:= FALSE,
+	Lock:= TRUE,
+	HoldOutput:= FALSE);
+	
+AssertEquals(result, sut.Actor, 'Target reached but output not hold.');
+
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Output_is_still_active_when_position_has_been_reached_but_holdPos_has_been_set" Id="{8b1a8142-d64c-4aa8-b645-31f96c78c98e}">
+      <Declaration><![CDATA[METHOD Output_is_still_active_when_position_has_been_reached_but_holdPos_has_been_set : BOOL
+VAR_INPUT
+END_VAR
+VAR
+	sut: FB_LinearMovementWithFeedback;
+	result : BOOL := TRUE;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('Output remains set when position has been reached when setting hold pos is true');
+
+sut(
+	ToPosition:= TRUE,
+	Feedback:= True,
+	Lock:= FALSE,
+	HoldOutput:= TRUE);
+	
+AssertEquals(result, sut.Actor, '');
+
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_LinearMovementWithFeedbackTest">
+      <LineId Id="11" Count="2" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_LinearMovementWithFeedbackTest.Movement_executes_when_triggered">
+      <LineId Id="36" Count="9" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_LinearMovementWithFeedbackTest.Movement_stops_when_position_is_reached">
+      <LineId Id="10" Count="1" />
+      <LineId Id="27" Count="3" />
+      <LineId Id="17" Count="3" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_LinearMovementWithFeedbackTest.No_Movement_When_Direction_Is_Locked">
+      <LineId Id="6" Count="1" />
+      <LineId Id="27" Count="3" />
+      <LineId Id="13" Count="3" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_LinearMovementWithFeedbackTest.Output_is_still_active_when_position_has_been_reached_but_holdPos_has_been_set">
+      <LineId Id="9" Count="1" />
+      <LineId Id="27" Count="3" />
+      <LineId Id="16" Count="3" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

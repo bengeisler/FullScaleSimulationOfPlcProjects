@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="FB_SewMovitracBFieldbusTest" Id="{7bd8768f-1d83-4ed6-b68c-1803c627cd42}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SewMovitracBFieldbusTest EXTENDS FB_TestSuite
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[StartDrive();
+HaltDrive();
+RunWithSetSpeed();
+ReadWarning();]]></ST>
+    </Implementation>
+    <Method Name="HaltDrive" Id="{1ae30293-fd52-4ea7-acbb-81956053393c}">
+      <Declaration><![CDATA[METHOD HaltDrive : BOOL
+VAR
+	sut: FB_SewMovitracBFieldbus;
+	control : ST_SimpleRotaryTwoWayDriveControl;
+	result : UINT := 2#0000_1111_0000_0000; // SEW: Big Endian, TwinCAT: Little Endian
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('Halt drive');
+
+control.Enable := TRUE;
+control.Lock := TRUE;
+
+sut(
+	PI1 := 0,
+	PI2 := 0,
+	PI3 := 0,
+	Control := control);
+	
+AssertEquals(result, sut.PO1.nUINT, 'Drive does not halt');
+
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ReadWarning" Id="{8e6c3be0-6ec9-42a6-a036-e1aaf21a8f48}">
+      <Declaration><![CDATA[METHOD ReadWarning : BOOL
+VAR_INPUT
+END_VAR
+VAR
+	sut: FB_SewMovitracBFieldbus;
+	result : BOOL := TRUE; 
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('Read warning');
+
+sut(
+	PI1 := 2#0010_0010_0000_0000,
+	PI2 := 0,
+	PI3 := 0);
+	
+AssertEquals(result, sut.Status.Warning, 'Warning not correctly decoded.');
+
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RunWithSetSpeed" Id="{967c6481-fbe4-4d33-99ef-e48f83a7e2de}">
+      <Declaration><![CDATA[METHOD RunWithSetSpeed : BOOL
+VAR_INPUT
+END_VAR
+VAR
+	sut: FB_SewMovitracBFieldbus;
+	control : ST_SimpleRotaryTwoWayDriveControl;
+	result : UINT := 2#0000_0110_0000_0000; // SEW: Big Endian, TwinCAT: Little Endian 
+	resultSpeed : UINT := HOST_TO_BE16(80);
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('Run with set speed');
+
+control.Direction := E_Direction.Right_Forward_Up;
+control.Enable := TRUE;
+control.Run := TRUE;
+control.Speed := 80;
+
+sut(
+	PI1 := 0,
+	PI2 := 0,
+	PI3 := 0, 
+	Control := control);
+
+AssertEquals(result, sut.PO1.nUINT, 'Drive does not run with set speed');
+AssertEquals(resultSpeed, sut.PO2, 'Drive does not run with set speed');
+
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StartDrive" Id="{d3226732-84b5-46a5-80e4-6e0ce4e1734b}">
+      <Declaration><![CDATA[METHOD StartDrive : BOOL
+VAR
+	sut: FB_SewMovitracBFieldbus;
+	control : ST_SimpleRotaryTwoWayDriveControl;
+	result : UINT := 2#0000_0110_0000_0000; // SEW: Big Endian, TwinCAT: Little Endian
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('Start drive');
+
+control.Direction := E_Direction.Right_Forward_Up;
+control.Enable := TRUE;
+control.Run := TRUE;
+
+sut(
+	PI1 := 0,
+	PI2 := 0,
+	PI3 := 0,
+	Control := control);
+	
+AssertEquals(result, sut.PO1.nUINT, 'Drive does not start');
+
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_SewMovitracBFieldbusTest">
+      <LineId Id="9" Count="1" />
+      <LineId Id="18" Count="1" />
+    </LineIds>
+    <LineIds Name="FB_SewMovitracBFieldbusTest.HaltDrive">
+      <LineId Id="10" Count="2" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="15" Count="7" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_SewMovitracBFieldbusTest.ReadWarning">
+      <LineId Id="10" Count="0" />
+      <LineId Id="15" Count="4" />
+      <LineId Id="21" Count="2" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_SewMovitracBFieldbusTest.RunWithSetSpeed">
+      <LineId Id="10" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="43" Count="1" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="48" Count="4" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="22" Count="1" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_SewMovitracBFieldbusTest.StartDrive">
+      <LineId Id="12" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="22" Count="3" />
+      <LineId Id="19" Count="2" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="FB_LinearMovementWithFeedback" Id="{e55efb08-7dc4-491e-8517-ba928e9c9bd6}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_LinearMovementWithFeedback
+VAR_INPUT
+	ToPosition: BOOL;	// TRUE: Moves the drive to position
+	Feedback:	BOOL;	// Feedback signal (e.g. reed contact)
+	Lock: 		BOOL;	// Interlock for the output
+	HoldOutput: BOOL;	// TRUE: Actor remains true when target position reached
+END_VAR
+VAR_OUTPUT
+	Actor:		BOOL;	
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[Actor := ToPosition AND NOT Lock AND (HoldOutput OR NOT Feedback);]]></ST>
+    </Implementation>
+    <LineIds Name="FB_LinearMovementWithFeedback">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

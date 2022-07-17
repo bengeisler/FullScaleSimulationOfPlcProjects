@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <DUT Name="ST_SewControlWord" Id="{7bc69e2e-0d97-495f-ab20-833e65bddc32}">
+    <Declaration><![CDATA[TYPE ST_SewControlWord :
+STRUCT
+	ControllerInhibit:			BIT; 	// (bit 0) inhibit="1", enable="0"
+	EnableElseRapidStop:		BIT;	// (bit 1) enable=1", rapid stop="0"
+	EnableElseStop:				BIT;	// (bit 2) enable="1", stop="0"
+	HoldControl:				BIT;	// (bit 3) not relevant
+	IntegratorSwitchover:		BIT;	// (bit 4) not relevant
+	ParameterSetSwitchOver:		BIT;	// (bit 5) not relevant
+	Reset:						BIT;	// (bit 6) reset="1"
+	Reserved1:					BIT;	// (bit 7) set reserved bits to zero
+	DirectionOfRotation:		BIT;	// (bit 8) 0=CW direction of rotation, 1=CCW direction of rotation
+	AccelerationDecceleration1: BIT;	// (bit 9) Works together with next bit
+	AccelerationDecceleration2:	BIT;	// (bit 10) 00=no change, 01=down, 10=up, 11=no change
+	FixedSetpoints1:			BIT;	// (bit 11) works together with next bit
+	FixedSetpoints2:			BIT;	// (bit 12) 00=speed setpoint via process output data word 2, 10=internal setpoint n11, 01=internal setpoint n12, 11=internal setpoint n13
+	FixedSetpointSwitchover:	BIT;	// (bit 13) 0=fixed setpoints of the active parameter set selectable via bit 11/22, 1=fixed setpoint of the other parameter set selectable via bit 11/12
+	Reserved2:					BIT;	// (bit 14) set reserved bits to zero
+	Reserved3:					BIT;	// (bit 15) set reserved bits to zero
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

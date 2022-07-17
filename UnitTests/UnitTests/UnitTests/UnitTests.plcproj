@@ -26,6 +26,10 @@
     <Compile Include="General\FB_Unit.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="GVLs\IO.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
@@ -35,10 +39,46 @@
     <Compile Include="POU_Test.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="RotaryMovement\E_Direction.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RotaryMovement\FB_SewMovitracBFieldbus.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RotaryMovement\FB_SimpleRotaryTwoWayDrive.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RotaryMovement\ST_SewControlWord.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RotaryMovement\ST_SewStatusWord.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RotaryMovement\ST_SimpleRotaryTwoWayDriveControl.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RotaryMovement\ST_SimpleRotaryTwoWayDriveStatus.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RotaryMovement\Test\FB_SewMovitracBFieldbusTest.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RotaryMovement\U_SewControlWord1.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RotaryMovement\U_SewStatusWord1.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TwoPointMovement\FB_LinearMovementWithFeedback.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="TwoPointMovement\FB_SimpleLinearTwoWayDrive.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="TwoPointMovement\ST_SimpleLinearTwoWayDriveHmi.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TwoPointMovement\Test\FB_LinearMovementWithFeedbackTest.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="TwoPointMovement\Test\FB_SimpleLinearTwoWayDrive_Test.TcPOU">
@@ -49,6 +89,8 @@
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
     <Folder Include="General" />
+    <Folder Include="RotaryMovement" />
+    <Folder Include="RotaryMovement\Test" />
     <Folder Include="TwoPointMovement" />
     <Folder Include="TwoPointMovement\Test" />
     <Folder Include="VISUs" />
@@ -62,6 +104,10 @@
     <PlaceholderReference Include="Tc2_System">
       <DefaultResolution>Tc2_System, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_System</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_Utilities">
+      <DefaultResolution>Tc2_Utilities, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_Utilities</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc3_Module">
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
